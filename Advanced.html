@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Student Information System</title>
+
+    <style>
+        body {
+            font-family: Arial;
+            margin: 0;
+            background-color: #f4f4f4;
+        }
+
+        /* Navbar */
+        .navbar {
+            background: #333;
+            padding: 10px;
+            text-align: center;
+        }
+
+        .navbar a {
+            color: white;
+            margin: 10px;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .container {
+            padding: 20px;
+        }
+
+        h2 {
+            color: darkblue;
+        }
+
+        table {
+            border-collapse: collapse;
+            width: 80%;
+            margin-bottom: 30px;
+            background: white;
+            box-shadow: 0 0 10px gray;
+        }
+
+        th, td {
+            border: 1px solid black;
+            padding: 10px;
+            text-align: center;
+        }
+
+        th {
+            background-color: #333;
+            color: white;
+        }
+
+        /* Highlight topper */
+        .topper {
+            background-color: lightgreen;
+            font-weight: bold;
+        }
+
+        /* Events */
+        ul li:hover {
+            color: red;
+            cursor: pointer;
+        }
+
+        /* Button */
+        button {
+            padding: 10px;
+            background: blue;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background: darkblue;
+        }
+
+        /* Highlight current day */
+        .today {
+            background-color: yellow;
+        }
+    </style>
+
+    <script>
+        // Search Student
+        function searchStudent() {
+            let input = document.getElementById("search").value.toLowerCase();
+            let rows = document.querySelectorAll("#resultTable tr");
+
+            rows.forEach((row, index) => {
+                if (index === 0) return;
+                let name = row.cells[0].innerText.toLowerCase();
+                row.style.display = name.includes(input) ? "" : "none";
+            });
+        }
+
+        // Price total
+        function calculateTotal() {
+            let prices = document.querySelectorAll(".price");
+            let total = 0;
+            prices.forEach(p => total += parseInt(p.innerText));
+            document.getElementById("total").innerText = total;
+        }
+
+        // Highlight today's day
+        window.onload = function () {
+            let today = new Date().toLocaleString('en-us', { weekday: 'long' });
+            let rows = document.querySelectorAll("#timetable tr");
+
+            rows.forEach(row => {
+                if (row.cells[0] && row.cells[0].innerText === today) {
+                    row.classList.add("today");
+                }
+            });
+        }
+    </script>
+
+</head>
+
+<body>
+
+<!-- Navbar -->
+<div class="navbar">
+    <a href="#">Results</a>
+    <a href="#">Events</a>
+    <a href="#">Conference</a>
+    <a href="#">Price</a>
+    <a href="#">Timetable</a>
+</div>
+
+<div class="container">
+
+<!-- a. Student Results -->
+<h2>Student Results</h2>
+
+<input type="text" id="search" placeholder="Search student..." onkeyup="searchStudent()">
+
+<table id="resultTable">
+    <tr>
+        <th>Name</th>
+        <th>Subject</th>
+        <th>Marks</th>
+        <th>Grade</th>
+    </tr>
+    <tr class="topper">
+        <td>Vishva</td>
+        <td>Maths</td>
+        <td>95</td>
+        <td>A+</td>
+    </tr>
+    <tr>
+        <td>Arun</td>
+        <td>Physics</td>
+        <td>88</td>
+        <td>A</td>
+    </tr>
+</table>
+
+<!-- b. Rivera Events -->
+<h2>Rivera Events</h2>
+<ul>
+    <li onclick="alert('Dance Event Selected')">Dance Competition</li>
+    <li onclick="alert('Music Night Selected')">Music Night</li>
+    <li onclick="alert('Hackathon Selected')">Hackathon</li>
+    <li onclick="alert('Drama Show Selected')">Drama Show</li>
+    <li onclick="alert('Gaming Tournament Selected')">Gaming Tournament</li>
+</ul>
+
+<!-- c. Conference -->
+<h2>Conference Details</h2>
+<p><b>Title:</b> International Tech Conference 2026</p>
+<p><b>Date:</b> 10th May 2026</p>
+<p><b>Venue:</b> Chennai Convention Center</p>
+<p><b>Topics:</b> AI, Cloud, Cybersecurity</p>
+
+<button onclick="alert('Registered Successfully!')">Register</button>
+
+<!-- d. Price List -->
+<h2>Price List</h2>
+<table>
+    <tr>
+        <th>Item</th>
+        <th>Price (₹)</th>
+    </tr>
+    <tr>
+        <td>Notebook</td>
+        <td class="price">50</td>
+    </tr>
+    <tr>
+        <td>Pen</td>
+        <td class="price">10</td>
+    </tr>
+    <tr>
+        <td>Bag</td>
+        <td class="price">500</td>
+    </tr>
+</table>
+
+<button onclick="calculateTotal()">Calculate Total</button>
+<p>Total: ₹<span id="total">0</span></p>
+
+<!-- e. Timetable -->
+<h2>Student Timetable</h2>
+<table id="timetable">
+    <tr>
+        <th>Day</th>
+        <th>9-10</th>
+        <th>10-11</th>
+        <th>11-12</th>
+        <th>1-2</th>
+    </tr>
+    <tr>
+        <td>Monday</td>
+        <td>Maths</td>
+        <td>Physics</td>
+        <td>English</td>
+        <td>Lab</td>
+    </tr>
+    <tr>
+        <td>Tuesday</td>
+        <td>CS</td>
+        <td>Maths</td>
+        <td>Physics</td>
+        <td>Sports</td>
+    </tr>
+</table>
+
+</div>
+
+</body>
+</html>
